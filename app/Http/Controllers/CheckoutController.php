@@ -6,10 +6,10 @@ use Illuminate\Http\Request;
 
 class CheckoutController extends Controller
 {
-    public function index(Request $request)
+    public function recurring(Request $request)
     {
         abort_unless(
-            $plan = collect(config('subscriptions.plans'))->get($request->plan),
+            $plan = collect(config('subscriptions.plans'))->where('type', 'recurring')->get($request->plan),
             404
         );
 
@@ -21,6 +21,21 @@ class CheckoutController extends Controller
                 'cancel_url' => route('plans')
             ], [
                 'email' => $request->user()->email
+            ]);
+    }
+
+    public function lifetime(Request $request)
+    {
+        $plan = collect(config('subscriptions.plans'))->where('type', 'lifetime')->get('lifetime');
+
+        return $request->user()
+            ->allowPromotionCodes()
+            ->checkout($plan['price_id'], [
+                'success_url' => route('dashboard'),
+                'cancel_url' => route('plans'),
+                'invoice_creation' => [
+                    'enabled' => true,
+                ],
             ]);
     }
 }

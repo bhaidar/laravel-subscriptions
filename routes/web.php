@@ -18,8 +18,8 @@ Route::get('/plans', [PlanController::class, 'index'])
     ->middleware([RedirectIfSubscribed::class])
     ->name('plans');
 
-Route::get('/checkout', [CheckoutController::class, 'index'])
-    ->name('checkout');
+Route::get('/checkout', [CheckoutController::class, 'recurring'])->name('checkout');
+Route::get('/checkout/lifetime', [CheckoutController::class, 'lifetime'])->name('checkout.lifetime');
 
 Route::get('/protected', [ProtectedController::class, 'index'])
     ->middleware(['auth', 'subscribed'])

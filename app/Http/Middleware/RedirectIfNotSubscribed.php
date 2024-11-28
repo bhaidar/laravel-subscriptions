@@ -15,7 +15,7 @@ class RedirectIfNotSubscribed
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (!$request->user()->subscribed()) {
+        if (!$request->user()->hasMembership()) {
             return redirect()->route('plans');
         }
 

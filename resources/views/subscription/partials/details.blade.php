@@ -10,6 +10,10 @@
     </header>
 
     <div class="mt-6 space-y-6">
+        @if(auth()->user()->hasLifetimeMembership())
+            <p>You have a lifetime membership.</p>
+        @endif
+
         @if(auth()->user()->subscribed())
             <ul>
                 <li>
@@ -35,9 +39,13 @@
             <x-primary-link-button href="{{ route('subscription.portal') }}">
                 Manage your subscription
             </x-primary-link-button>
+
+            <x-primary-link-button href="{{ route('checkout.lifetime') }}">
+                Swap to lifetime
+            </x-primary-link-button>
         @endif
 
-        @if(!auth()->user()->subscribed())
+        @if(!auth()->user()->hasMembership())
             <x-primary-link-button href="{{ route('plans') }}">
                 Choose a plan
             </x-primary-link-button>

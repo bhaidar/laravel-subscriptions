@@ -22,7 +22,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Blade::if('notsubscribed', function () {
-            return !auth()->user()?->subscribed();
+            return !auth()->user()?->hasMembership();
         });
 
         Cashier::keepPastDueSubscriptionsActive();

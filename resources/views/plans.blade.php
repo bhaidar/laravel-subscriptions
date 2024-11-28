@@ -26,6 +26,16 @@
                             Buy plan
                         </x-primary-link-button>
                     </div>
+                    <div class="pt-16 lg:px-8 lg:pt-0 xl:px-14 text-center grow">
+                        <h3 class="text-base font-semibold leading-7 text-gray-900">Lifetime</h3>
+                        <p class="mt-6 gap-x-1">
+                            <span class="text-5xl font-bold tracking-tight text-gray-900">$349</span>
+                            <span class="text-sm font-semibold leading-6 text-gray-600">/once</span>
+                        </p>
+                        <x-primary-link-button href="{{ route('checkout.lifetime', ['plan' => 'lifetime']) }}" class="mt-8 w-1/2 justify-center">
+                            Buy plan
+                        </x-primary-link-button>
+                    </div>
                 </div>
             </div>
         </div>
